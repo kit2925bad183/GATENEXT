@@ -1,0 +1,57 @@
+server:
+  port: 8080
+  servlet:
+    session:
+      cookie:
+        name: GATENEST_SESSION
+        http-only: true
+        same-site: lax
+        secure: false
+      timeout: 8h
+
+spring:
+  application:
+    name: gatenest-backend
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/gatenest_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&characterEncoding=UTF-8}
+    username: ${SPRING_DATASOURCE_USERNAME:gatenest_user}
+    password: ${SPRING_DATASOURCE_PASSWORD:gatenest_password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      pool-name: GateNestHikariPool
+      maximum-pool-size: 15
+      minimum-idle: 5
+      idle-timeout: 300000
+      connection-timeout: 20000
+      max-lifetime: 1200000
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    locations: classpath:db/migration
+  session:
+    store-type: jdbc
+    jdbc:
+      initialize-schema: never
+      table-name: SPRING_SESSION
+
+gatenest:
+  security:
+    cors:
+      allowed-origins:
+        - "http://localhost:5173"
+        - "http://localhost:3000"
+        - "http://127.0.0.1:5173"
+        - "http://localhost"
+        - "http://127.0.0.1"
+  bootstrap:
+    admin-token: ${GATENEST_BOOTSTRAP_TOKEN:bootstrap-gatenest-admin-secret-2026}
+  default-timezone: ${GATENEST_TIMEZONE:Asia/Kolkata}
+
+logging:
+  level:
+    root: INFO
+    com.gatenest: DEBUG
+    org.springframework.security: INFO
+    org.springframework.jdbc: INFO

@@ -1,0 +1,28 @@
+{
+  "id": "com.gatenest.app",
+  "name": "GateNest — Apartment Visitor Management System",
+  "short_name": "GateNest",
+  "description": "Enterprise-grade visitor management, gate access control, parcels, and community operations for residential societies.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#FFFFFF",
+  "theme_color": "#1E40AF",
+  "categories": ["utilities", "productivity", "security"],
+  "icons": [
+    {
+      "src": "/logo-icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo-icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": []
+}

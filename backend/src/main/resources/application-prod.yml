@@ -1,0 +1,34 @@
+server:
+  port: 8080
+  forward-headers-strategy: native
+  servlet:
+    session:
+      cookie:
+        name: GATENEST_SESSION
+        http-only: true
+        same-site: lax
+        secure: ${COOKIE_SECURE:false}
+      timeout: 8h
+
+spring:
+  datasource:
+    hikari:
+      pool-name: GateNestProdPool
+      maximum-pool-size: 25
+      minimum-idle: 10
+      idle-timeout: 300000
+      connection-timeout: 20000
+      max-lifetime: 1200000
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    locations: classpath:db/migration
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%X{correlationId}] %-5level %logger{36} - %msg%n"
+  level:
+    root: INFO
+    com.gatenest: INFO
+    org.springframework.security: WARN
+    org.springframework.jdbc: WARN
